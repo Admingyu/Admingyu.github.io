@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="能动手创造的东西，不香吗">
+  <script data-ad-client="ca-pub-5351183418704035" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <link rel="icon" href="/img/logo.png">
+  <title>神力科莎Linux 开服务器</title>
+  
+  
+  <meta property="og:title" content="神力科莎Linux 开服务器">
+  
+  
+  <meta property="og:url" content="https://www.gemingyu.top/2021/02/09/assettoLinuxServer/index.html">
+  
+  
+  <meta property="og:img" content="/img/avatar.png">
+  
+  
+  <meta property="og:img" content="能动手创造的东西，不香吗">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2021-02-09">
+  <meta property="og:article:modified_time" content="2021-02-09">
+  <meta property="og:article:author" content="admingyu">
+  
+  
+  <meta property="og:article:tag" content="神力科莎">
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  <link rel="prefetch" href="//unpkg.com/valine/dist/Valine.min.js" as="script">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/logo.png" alt="logo">
+      
+      <span class="navbar-logo-dsc">G.M.Y</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a href="/links" class="navbar-menu-item">
+    
+    友链
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      神力科莎Linux 开服务器
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2021-02-09T02:25:14.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2021-02-09</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>377 字</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/神力科莎/" class="post-meta-link">神力科莎</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="此方法来源于Steam一个大佬"><a href="#此方法来源于Steam一个大佬" class="headerlink" title="此方法来源于Steam一个大佬"></a>此方法来源于Steam一个大佬</h2><p>– 推荐系统：Ubuntu<br>– 需要公网ip的服务器</p>
+<h2 id="如果你的服务器是64位的系统需要安装32位的运行库（Steam-是32位的："><a href="#如果你的服务器是64位的系统需要安装32位的运行库（Steam-是32位的：" class="headerlink" title="如果你的服务器是64位的系统需要安装32位的运行库（Steam 是32位的："></a>如果你的服务器是64位的系统需要安装32位的运行库（Steam 是32位的：</h2><p>32位系统可跳过</p>
+<pre class="highlight"><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install lib32gcc1 </span><br></pre>
+<h3 id="安装stracker"><a href="#安装stracker" class="headerlink" title="安装stracker"></a>安装stracker</h3><pre class="highlight"><span class="line">sudo apt-get install zlib1g:i386</span><br></pre>
+<h3 id="创建Steam用户-并获取该用户下的目录权限："><a href="#创建Steam用户-并获取该用户下的目录权限：" class="headerlink" title="创建Steam用户,并获取该用户下的目录权限："></a>创建Steam用户,并获取该用户下的目录权限：</h3><pre class="highlight"><span class="line">sudo mkdir  /home/steam                  </span><br><span class="line">chown user: group /home/steam -R</span><br></pre>
+<h3 id="解压Steam-Linux终端，并解压执行"><a href="#解压Steam-Linux终端，并解压执行" class="headerlink" title="解压Steam Linux终端，并解压执行"></a>解压Steam Linux终端，并解压执行</h3><pre class="highlight"><span class="line">sudo chmod -R 755  /home/steam/</span><br><span class="line"><span class="built_in">cd</span> /home/steam</span><br><span class="line">wget http://media.steampowered.com/client/steamcmd_linux.tar.gz</span><br><span class="line">tar -xvf steamcmd_linux.tar.gz </span><br><span class="line">rm steamcmd_linux.tar.gz  </span><br><span class="line">./steamcmd.sh +@sSteamCmdForcePlatformType windows</span><br><span class="line"></span><br></pre>
+<h2 id="之后会进入Steam终端-gt-像这样："><a href="#之后会进入Steam终端-gt-像这样：" class="headerlink" title="之后会进入Steam终端&gt;,像这样："></a>之后会进入Steam终端&gt;,像这样：</h2><pre class="highlight"><span class="line">Steam&gt;</span><br></pre>
+<h3 id="输入Login-你的用户名并回车"><a href="#输入Login-你的用户名并回车" class="headerlink" title="输入Login  你的用户名并回车"></a>输入Login  你的用户名并回车</h3><pre class="highlight"><span class="line">Steam&gt; login &lt;username&gt;;</span><br><span class="line">Steam&gt; passwd</span><br><span class="line">Steam&gt; enter security code sent to you registration email of your steam account </span><br></pre>
+<p>然后再输入密码登录, 后面可能还让你输入邮件验证码、动态令牌之类的，根据提示来就行</p>
+<h3 id="然后安装app："><a href="#然后安装app：" class="headerlink" title="然后安装app："></a>然后安装app：</h3><pre class="highlight"><span class="line">Steam&gt; force_install_dir ./assetto</span><br><span class="line">Steam&gt; app_update 302550  </span><br><span class="line">Steam&gt; <span class="built_in">exit</span></span><br></pre>
+<p>然后配置一下你的开服信息，比如赛道，车，服务器名称什么的<br>配置文件在*/home/steam/assetto/cfg/server_cfg.ini*<br>用vim或者nano编辑都可以的</p>
+<p>配置车辆列表：<br><em>/home/steam/assetto/cfg/entry_list.ini</em></p>
+<h3 id="配置完成后开服："><a href="#配置完成后开服：" class="headerlink" title="配置完成后开服："></a>配置完成后开服：</h3><pre class="highlight"><span class="line">./acServer</span><br></pre>
+<p>到此结束，此外你还要把端口9600的udp，tcp的端口打开，包括http的8081端口也要打开：</p>
+<p>比如可以这样打开：</p>
+<pre class="highlight"><span class="line">sudo ufw allow 9600</span><br><span class="line">sudo ufw allow 8081</span><br></pre>
+<p><strong>注意，阿里云的服务器，要到阿里云ECS的安全组里面配置打开</strong></p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://www.gemingyu.top/about">admingyu</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://www.gemingyu.top/2021/02/09/assettoLinuxServer/">https://www.gemingyu.top/2021/02/09/assettoLinuxServer/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2021/02/09/windowsUnrecognizedNetwork/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">上一篇</div>
+        
+        <div class="nav-title">windows10 开机无法识别的网络，必须重启网卡或者诊断才能获取ip </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2021/02/05/AssettoCorsaLan/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">神力科莎局域网联机，也可用zero-tier </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content comment-card" style="margin-top: 16px;">
+  <div class="comment-card-title">评论</div>
+  
+  <div id="vcomments"></div>
+  
+  <script>
+    loadScript("//unpkg.com/valine/dist/Valine.min.js");
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+      new Valine({
+        el: '#vcomments',
+        appId: 'p50FHDYoXeKhgNL5geAy9h9H-gzGzoHsz',
+        appKey: 'aNaNwmUJLv6AWf7Ke406P15j',
+        placeholder: 'Just go go',
+        path: window.location.pathname,
+        avatar: 'mp',
+        meta: ["nick","mail","link"],
+        pageSize: '10',
+        lang: '',
+        visitor: 'false',
+        highlight: true,
+        recordIP: false,
+        
+        serverURLs: 'https://p50fhdyo.lc-cn-n1-shared.com',
+        
+        
+        
+        enableQQ: 'false',
+        requiredFields: [],
+      });
+    };
+  </script>
+
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A4%E6%96%B9%E6%B3%95%E6%9D%A5%E6%BA%90%E4%BA%8ESteam%E4%B8%80%E4%B8%AA%E5%A4%A7%E4%BD%AC"><span class="toc-text">此方法来源于Steam一个大佬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF64%E4%BD%8D%E7%9A%84%E7%B3%BB%E7%BB%9F%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%8532%E4%BD%8D%E7%9A%84%E8%BF%90%E8%A1%8C%E5%BA%93%EF%BC%88Steam-%E6%98%AF32%E4%BD%8D%E7%9A%84%EF%BC%9A"><span class="toc-text">如果你的服务器是64位的系统需要安装32位的运行库（Steam 是32位的：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85stracker"><span class="toc-text">安装stracker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BASteam%E7%94%A8%E6%88%B7-%E5%B9%B6%E8%8E%B7%E5%8F%96%E8%AF%A5%E7%94%A8%E6%88%B7%E4%B8%8B%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%EF%BC%9A"><span class="toc-text">创建Steam用户,并获取该用户下的目录权限：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8BSteam-Linux%E7%BB%88%E7%AB%AF%EF%BC%8C%E5%B9%B6%E8%A7%A3%E5%8E%8B%E6%89%A7%E8%A1%8C"><span class="toc-text">解压Steam Linux终端，并解压执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%8B%E5%90%8E%E4%BC%9A%E8%BF%9B%E5%85%A5Steam%E7%BB%88%E7%AB%AF-gt-%E5%83%8F%E8%BF%99%E6%A0%B7%EF%BC%9A"><span class="toc-text">之后会进入Steam终端&gt;,像这样：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5Login-%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D%E5%B9%B6%E5%9B%9E%E8%BD%A6"><span class="toc-text">输入Login  你的用户名并回车</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E5%AE%89%E8%A3%85app%EF%BC%9A"><span class="toc-text">然后安装app：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%E5%90%8E%E5%BC%80%E6%9C%8D%EF%BC%9A"><span class="toc-text">配置完成后开服：</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/avatar.png" class="author-img">
+
+<p class="author-name">admingyu</p>
+<p class="author-description">自己动手丰衣足食</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>13</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>4</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A4%E6%96%B9%E6%B3%95%E6%9D%A5%E6%BA%90%E4%BA%8ESteam%E4%B8%80%E4%B8%AA%E5%A4%A7%E4%BD%AC"><span class="toc-text">此方法来源于Steam一个大佬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF64%E4%BD%8D%E7%9A%84%E7%B3%BB%E7%BB%9F%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%8532%E4%BD%8D%E7%9A%84%E8%BF%90%E8%A1%8C%E5%BA%93%EF%BC%88Steam-%E6%98%AF32%E4%BD%8D%E7%9A%84%EF%BC%9A"><span class="toc-text">如果你的服务器是64位的系统需要安装32位的运行库（Steam 是32位的：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85stracker"><span class="toc-text">安装stracker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BASteam%E7%94%A8%E6%88%B7-%E5%B9%B6%E8%8E%B7%E5%8F%96%E8%AF%A5%E7%94%A8%E6%88%B7%E4%B8%8B%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%EF%BC%9A"><span class="toc-text">创建Steam用户,并获取该用户下的目录权限：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8BSteam-Linux%E7%BB%88%E7%AB%AF%EF%BC%8C%E5%B9%B6%E8%A7%A3%E5%8E%8B%E6%89%A7%E8%A1%8C"><span class="toc-text">解压Steam Linux终端，并解压执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%8B%E5%90%8E%E4%BC%9A%E8%BF%9B%E5%85%A5Steam%E7%BB%88%E7%AB%AF-gt-%E5%83%8F%E8%BF%99%E6%A0%B7%EF%BC%9A"><span class="toc-text">之后会进入Steam终端&gt;,像这样：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5Login-%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D%E5%B9%B6%E5%9B%9E%E8%BD%A6"><span class="toc-text">输入Login  你的用户名并回车</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E5%AE%89%E8%A3%85app%EF%BC%9A"><span class="toc-text">然后安装app：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%E5%90%8E%E5%BC%80%E6%9C%8D%EF%BC%9A"><span class="toc-text">配置完成后开服：</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
+    
+    <a href="\tags\Flask" title="Flask"><div class="tags-list-item">Flask</div></a>
+    
+    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
+    
+    <a href="\tags\神力科莎" title="神力科莎"><div class="tags-list-item">神力科莎</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A4%E6%96%B9%E6%B3%95%E6%9D%A5%E6%BA%90%E4%BA%8ESteam%E4%B8%80%E4%B8%AA%E5%A4%A7%E4%BD%AC"><span class="toc-text">此方法来源于Steam一个大佬</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF64%E4%BD%8D%E7%9A%84%E7%B3%BB%E7%BB%9F%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%8532%E4%BD%8D%E7%9A%84%E8%BF%90%E8%A1%8C%E5%BA%93%EF%BC%88Steam-%E6%98%AF32%E4%BD%8D%E7%9A%84%EF%BC%9A"><span class="toc-text">如果你的服务器是64位的系统需要安装32位的运行库（Steam 是32位的：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85stracker"><span class="toc-text">安装stracker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BASteam%E7%94%A8%E6%88%B7-%E5%B9%B6%E8%8E%B7%E5%8F%96%E8%AF%A5%E7%94%A8%E6%88%B7%E4%B8%8B%E7%9A%84%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%EF%BC%9A"><span class="toc-text">创建Steam用户,并获取该用户下的目录权限：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8BSteam-Linux%E7%BB%88%E7%AB%AF%EF%BC%8C%E5%B9%B6%E8%A7%A3%E5%8E%8B%E6%89%A7%E8%A1%8C"><span class="toc-text">解压Steam Linux终端，并解压执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%8B%E5%90%8E%E4%BC%9A%E8%BF%9B%E5%85%A5Steam%E7%BB%88%E7%AB%AF-gt-%E5%83%8F%E8%BF%99%E6%A0%B7%EF%BC%9A"><span class="toc-text">之后会进入Steam终端&gt;,像这样：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5Login-%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D%E5%B9%B6%E5%9B%9E%E8%BD%A6"><span class="toc-text">输入Login  你的用户名并回车</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E5%AE%89%E8%A3%85app%EF%BC%9A"><span class="toc-text">然后安装app：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%E5%90%8E%E5%BC%80%E6%9C%8D%EF%BC%9A"><span class="toc-text">配置完成后开服：</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2026-01-01</div>
+        <a href="/2026/01/01/记一次golang内存泄露排查和修复/"><div class="recent-posts-item-content">记一次golang内存泄露排查和修复</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-02-07</div>
+        <a href="/2024/02/07/Golang实现不用SSL使用HTTP2服务/"><div class="recent-posts-item-content">Golang实现不用SSL使用HTTP2服务-golang http2 without tls(h2c)</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-08-15</div>
+        <a href="/2023/08/15/OpenWrt-ps命令/"><div class="recent-posts-item-content">OpenWrt ps命令不全，不能使用ps -ef</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-07-27</div>
+        <a href="/2023/07/27/快速体验在终端中的浏览器/"><div class="recent-posts-item-content">快速体验在终端中使用浏览器</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2024
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">G.M.Y </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    <div class="BbeiAn-info">
+      <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">皖ICP备20004968号-1 </a>
+    </div>
+    
+    
+    
+      <div class="footer-dsc">
+        
+        访问量<span id="busuanzi_value_site_pv"></span>次
+        
+        
+        <span>&nbsp;|&nbsp;</span>
+        
+        
+        访客数<span id="busuanzi_value_site_uv"></span>次
+        
+      </div>
+      
+    
+    <script type="text/javascript" src="//js.users.51.la/21061817.js"></script>
+</footer>
+
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  <script>loadScript("/js/lib/busuanzi.min.js")</script>
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

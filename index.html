@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="能动手创造的东西，不香吗">
+  <script data-ad-client="ca-pub-5351183418704035" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <link rel="icon" href="/img/logo.png">
+  <title>G.M.Y</title>
+  
+  
+  <meta property="og:title" content="G.M.Y">
+  
+  
+  <meta property="og:url" content="https://www.gemingyu.top/index.html">
+  
+  
+  <meta property="og:img" content="/img/avatar.png">
+  
+  
+  <meta property="og:img" content="能动手创造的东西，不香吗">
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  <link rel="prefetch" href="//unpkg.com/valine/dist/Valine.min.js" as="script">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/logo.png" alt="logo">
+      
+      <span class="navbar-logo-dsc">G.M.Y</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a href="/links" class="navbar-menu-item">
+    
+    友链
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2026/01/01/记一次golang内存泄露排查和修复/">
+      <h1 class="post-title">
+        记一次golang内存泄露排查和修复
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      使用pprof工具分析内存情况
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2026-01-01T14:20:00.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2026-01-01</span>
+        </time>
+        
+      </div>
+      <a href="/2026/01/01/%E8%AE%B0%E4%B8%80%E6%AC%A1golang%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%8E%92%E6%9F%A5%E5%92%8C%E4%BF%AE%E5%A4%8D/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2024/02/07/Golang实现不用SSL使用HTTP2服务/">
+      <h1 class="post-title">
+        Golang实现不用SSL使用HTTP2服务-golang http2 without tls(h2c)
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      使用h2c包实现，h2c包即：http2 without tls，不用tls的http2协议，有关支持这个的声音早在2016年就已经提出来(issue)[
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2024-02-07T03:40:00.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2024-02-07</span>
+        </time>
+        
+      </div>
+      <a href="/2024/02/07/Golang%E5%AE%9E%E7%8E%B0%E4%B8%8D%E7%94%A8SSL%E4%BD%BF%E7%94%A8HTTP2%E6%9C%8D%E5%8A%A1/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2023/08/15/OpenWrt-ps命令/">
+      <h1 class="post-title">
+        OpenWrt ps命令不全，不能使用ps -ef
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      因为openwrt lede istoreos这些系统ps命令都是来自busybox的，所以功能不全，aux，ef选项都是不支持的，安装cps-ng-ps可解决
+
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2023-08-15T02:18:53.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2023-08-15</span>
+        </time>
+        
+      </div>
+      <a href="/2023/08/15/OpenWrt-ps%E5%91%BD%E4%BB%A4/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2023/07/27/快速体验在终端中的浏览器/">
+      <h1 class="post-title">
+        快速体验在终端中使用浏览器
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      众所周知 终端可以显示各种颜色的字符，字符又可以构成图形，于是有个项目是将html转为svga，做到可以在终端ssh中显示html内容Forking Chr...
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2023-07-27T08:11:32.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2023-07-27</span>
+        </time>
+        
+      </div>
+      <a href="/2023/07/27/%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2023/06/19/美能达X300快门故障维修/">
+      <h1 class="post-title">
+        美能达X300快门故障维修
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      前几天用x300拍了几张照片， 发现很多曝光不均匀的问题，怀疑是宽门帘有问题搜了一下，好像确实是，需要调整快门：见：
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2023-06-19T15:05:00.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2023-06-19</span>
+        </time>
+        
+      </div>
+      <a href="/2023/06/19/%E7%BE%8E%E8%83%BD%E8%BE%BEX300%E5%BF%AB%E9%97%A8%E6%95%85%E9%9A%9C%E7%BB%B4%E4%BF%AE/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2023/06/19/rs-28-gameconsole-tear/">
+      <h1 class="post-title">
+        rs-28游戏机拆解与刷机
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      本来是买给朋友们当伴手礼的，仔细研究一下发现这东西竟然有linux系统
+整合版固件以及下载地址： RS77-4GB全中文...
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2023-06-19T11:31:01.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2023-06-19</span>
+        </time>
+        
+      </div>
+      <a href="/2023/06/19/rs-28-gameconsole-tear/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2021/02/19/interview/">
+      <h1 class="post-title">
+        interview
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      几个面试题
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2021-02-19T09:59:45.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2021-02-19</span>
+        </time>
+        
+      </div>
+      <a href="/2021/02/19/interview/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2021/02/09/cheap-server-solution-in-china/">
+      <h1 class="post-title">
+        便宜的个人服务器方案
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      可能是国内实现最低成本的...
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2021-02-09T07:38:06.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2021-02-09</span>
+        </time>
+        
+      </div>
+      <a href="/2021/02/09/cheap-server-solution-in-china/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2021/02/09/FlaskSkill1/">
+      <h1 class="post-title">
+        FlaskBUG和技巧（小白
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      问题和BUG
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2021-02-09T03:17:15.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2021-02-09</span>
+        </time>
+        
+      </div>
+      <a href="/2021/02/09/FlaskSkill1/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+<div class="card">
+  
+  <article class="card card-content">
+    <a href="/2021/02/09/windowsUnrecognizedNetwork/">
+      <h1 class="post-title">
+        windows10 开机无法识别的网络，必须重启网卡或者诊断才能获取ip
+      </h1>
+    </a>
+    <div class="card-excerpt">
+      
+      点击开始菜单，在搜索栏中输入：“services.msc”（或者开始菜单搜索“服务”），并按下回车。如果此时弹出用户账户控制窗口，点击“继续”
+找到一下几个服务：
+DHCP Client
+
+      
+    </div>
+    <div class="card-post-footer">
+      <div class="post-meta">
+        <time datetime="2021-02-09T02:54:53.000Z">
+          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+          <span>2021-02-09</span>
+        </time>
+        
+      </div>
+      <a href="/2021/02/09/windowsUnrecognizedNetwork/">继续阅读 </a>
+    </div>
+  </article>
+</div>
+
+
+<div class="nav">
+  
+  
+  <div class="nav-item-next">
+    <a href="/page/2/" class="nav-link">
+      <div>
+        <div class="nav-label">下一页</div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+</main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/avatar.png" class="author-img">
+
+<p class="author-name">admingyu</p>
+<p class="author-description">自己动手丰衣足食</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>13</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>4</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
+    
+    <a href="\tags\Flask" title="Flask"><div class="tags-list-item">Flask</div></a>
+    
+    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
+    
+    <a href="\tags\神力科莎" title="神力科莎"><div class="tags-list-item">神力科莎</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+  <article class="card card-content widescreen-archive archive-widget">
+    <div class="archive-card">
+  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>归档</div>
+  <div class="archive-card-list">
+    
+    
+    
+      
+        
+        
+        
+      
+    
+      
+        
+          <a href="/archives/2026" class="archive-card-list-item">
+              2026
+              <span class="archive-card-list-item-badge">1</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+          <a href="/archives/2024" class="archive-card-list-item">
+              2024
+              <span class="archive-card-list-item-badge">1</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a href="/archives/2023" class="archive-card-list-item">
+              2023
+              <span class="archive-card-list-item-badge">4</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    
+      <a href="/archives/2021" class="archive-card-list-item">
+          2021
+          <span class="archive-card-list-item-badge">7</span>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2026-01-01</div>
+        <a href="/2026/01/01/记一次golang内存泄露排查和修复/"><div class="recent-posts-item-content">记一次golang内存泄露排查和修复</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-02-07</div>
+        <a href="/2024/02/07/Golang实现不用SSL使用HTTP2服务/"><div class="recent-posts-item-content">Golang实现不用SSL使用HTTP2服务-golang http2 without tls(h2c)</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-08-15</div>
+        <a href="/2023/08/15/OpenWrt-ps命令/"><div class="recent-posts-item-content">OpenWrt ps命令不全，不能使用ps -ef</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2023-07-27</div>
+        <a href="/2023/07/27/快速体验在终端中的浏览器/"><div class="recent-posts-item-content">快速体验在终端中使用浏览器</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="archive-card">
+  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>归档</div>
+  <div class="archive-card-list">
+    
+    
+    
+      
+        
+        
+        
+      
+    
+      
+        
+          <a href="/archives/2026" class="archive-card-list-item">
+              2026
+              <span class="archive-card-list-item-badge">1</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+          <a href="/archives/2024" class="archive-card-list-item">
+              2024
+              <span class="archive-card-list-item-badge">1</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a href="/archives/2023" class="archive-card-list-item">
+              2023
+              <span class="archive-card-list-item-badge">4</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    
+      <a href="/archives/2021" class="archive-card-list-item">
+          2021
+          <span class="archive-card-list-item-badge">7</span>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2024
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">G.M.Y </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    <div class="BbeiAn-info">
+      <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">皖ICP备20004968号-1 </a>
+    </div>
+    
+    
+    
+      <div class="footer-dsc">
+        
+        访问量<span id="busuanzi_value_site_pv"></span>次
+        
+        
+        <span>&nbsp;|&nbsp;</span>
+        
+        
+        访客数<span id="busuanzi_value_site_uv"></span>次
+        
+      </div>
+      
+    
+    <script type="text/javascript" src="//js.users.51.la/21061817.js"></script>
+</footer>
+
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  <script>loadScript("/js/lib/busuanzi.min.js")</script>
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>

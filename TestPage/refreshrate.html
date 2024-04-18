@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>屏幕刷新率在线测试</title>
+    <style>
+        .span1 {
+            width: 40%;
+
+        }
+
+        .span1 img {
+            border-radius: 50%;
+            animation: 1s linear 0s infinite normal none running changeright;
+            transform: rotate(0deg);
+        }
+
+        @keyframes changeright {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            50% {
+                -webkit-transform: rotate(180deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        .imgrotate_rotate {
+		max-height: 100%;
+            text-align: center;
+        }
+
+        .imgrotate_rotate img {
+	    max-height: 100%;
+		max-width: 100%;
+            border-radius: 50%;
+            animation: changeright 1s linear infinite;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- <div class="span1">
+        <img src="https://moonbase.lgbt/misc/cohost/2465593/wheel3.png">
+    </div> -->
+
+    <div class="imgrotate_rotate">
+        <img src="./wheel3.png">
+    </div>
+</body>
+
+</html>
