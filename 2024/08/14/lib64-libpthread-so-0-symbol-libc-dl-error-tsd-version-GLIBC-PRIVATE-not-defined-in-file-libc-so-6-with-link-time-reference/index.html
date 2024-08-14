@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="能动手创造的东西，不香吗">
+  <script data-ad-client="ca-pub-5351183418704035" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <link rel="icon" href="/img/logo.png">
+  <title>lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</title>
+  
+  
+  <meta property="og:title" content="lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference">
+  
+  
+  <meta property="og:url" content="https://www.gemingyu.top/2024/08/14/lib64-libpthread-so-0-symbol-libc-dl-error-tsd-version-GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference/index.html">
+  
+  
+  <meta property="og:img" content="/img/avatar.png">
+  
+  
+  <meta property="og:img" content="能动手创造的东西，不香吗">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2024-08-14">
+  <meta property="og:article:modified_time" content="2024-08-14">
+  <meta property="og:article:author" content="admingyu">
+  
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  <link rel="prefetch" href="//unpkg.com/valine/dist/Valine.min.js" as="script">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/logo.png" alt="logo">
+      
+      <span class="navbar-logo-dsc">G.M.Y</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a href="/links" class="navbar-menu-item">
+    
+    友链
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2024-08-14T07:43:46.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2024-08-14</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>726 字</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h1 id="GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference"><a href="#GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference" class="headerlink" title="GLIBC_PRIVATE not defined in file libc.so.6 with link time reference"></a>GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</h1><p>自己在centos上想升级glib，下载源码make install之后，不能用，又<code>yum install gettext</code>，之后系统大部分命令都不能执行了，全部报这个错误：</p>
+<p>lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</p>
+<p>比如grep：<br>grep: relocation error: /lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference<br>mkdir: relocation error: /lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference<br>/usr/bin/python3: relocation error: /lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</p>
+<h4 id="ls-ps-grep这些基本命令都不能用了"><a href="#ls-ps-grep这些基本命令都不能用了" class="headerlink" title="ls,ps,grep这些基本命令都不能用了"></a>ls,ps,grep这些基本命令都不能用了</h4><p>貌似只有内核自带的命令能用，看起来是系统坏了</p>
+<p><strong><em>此时千万不要断开ssh连接（断开就连不上了，需要接触到服务器，才能进行后续补救的措施）</em></strong><br><strong><em>更不要重启，重启就开不开机了</em></strong></p>
+<h4 id="先用head查看lib64里面现有版本有哪些"><a href="#先用head查看lib64里面现有版本有哪些" class="headerlink" title="先用head查看lib64里面现有版本有哪些:"></a>先用head查看lib64里面现有版本有哪些:</h4><pre class="highlight"><span class="line"><span class="built_in">head</span> /usr/lib64/ld*.so</span><br><span class="line"><span class="built_in">head</span> /usr/lib64/libc-*</span><br></pre>
+<p>返回</p>
+<pre class="highlight"><span class="line">==&gt; /usr/lib64/ld-2.17.so &lt;==</span><br><span class="line">ELF          &gt;    @    </span><br><span class="line">==&gt; /usr/lib64/ld-2.25.so &lt;==</span><br><span class="line">ELF          &gt;    �      @       �1</span><br><span class="line">==&gt; /usr/lib64/libc-2.17.so &lt;==</span><br><span class="line">ELF         &gt;    `&amp;     @       p�          @ 8 </span><br><span class="line">==&gt; /usr/lib64/libc-2.25.so &lt;==</span><br><span class="line">ELF         &gt;           @        Û         @ 8 </span><br></pre>
+<p>说明存在2.25和2.17两个版本，由于我是相当于升级了ld版本，所以原来的是2.17</p>
+<h4 id="重新链接回到2-17版本，并测试ps能不能用："><a href="#重新链接回到2-17版本，并测试ps能不能用：" class="headerlink" title="重新链接回到2.17版本，并测试ps能不能用："></a>重新链接回到2.17版本，并测试ps能不能用：</h4><pre class="highlight"><span class="line">sln /usr/lib64/ld-2.17.so /usr/lib64/ld-linux-x86-64.so.2</span><br><span class="line">sln /usr/lib64/libc-2.17.so /usr/lib64/libc.so.6</span><br><span class="line">ps</span><br><span class="line"><span class="comment"># 返回：</span></span><br><span class="line">   PID TTY          TIME CMD</span><br><span class="line">     1 ?        14:01:50 systemd</span><br><span class="line">     2 ?        00:05:22 kthreadd</span><br><span class="line">     4 ?        00:00:00 kworker/0:0H</span><br><span class="line">     6 ?        01:53:51 ksoftirqd/0</span><br><span class="line">     7 ?        00:02:25 migration/0</span><br><span class="line">     8 ?        00:00:00 rcu_bh</span><br></pre>
+<p>到这里说明解决方案得到了验证,后续的测试发现python，sshd，supervisor还不能用，有报错：</p>
+<pre class="highlight"><span class="line">/usr/bin/python3: relocation error: /lib64/libdl.so.2: symbol _dl_catch_error, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</span><br><span class="line">virtualenvwrapper.sh: There was a problem running the initialization hooks.</span><br></pre>
+<h4 id="检查目录，看下在新增-usr-lib64-ld-2-25-so那个时间点，哪些文件链接被改变了，就改回去"><a href="#检查目录，看下在新增-usr-lib64-ld-2-25-so那个时间点，哪些文件链接被改变了，就改回去" class="headerlink" title="检查目录，看下在新增/usr/lib64/ld-2.25.so那个时间点，哪些文件链接被改变了，就改回去"></a>检查目录，看下在新增/usr/lib64/ld-2.25.so那个时间点，哪些文件链接被改变了，就改回去</h4><pre class="highlight"><span class="line">$ <span class="built_in">ls</span> -lh /lib64/| grep <span class="string">&#x27;14 10:58&#x27;</span></span><br><span class="line">drwxr-xr-x.  2 root root  4.0K Aug 14 10:58 gettext</span><br><span class="line">lrwxrwxrwx.  1 root root    20 Aug 14 10:58 libasprintf.so.0 -&gt; libasprintf.so.0.0.0</span><br><span class="line">lrwxrwxrwx.  1 root root    21 Aug 14 10:58 libcroco-0.6.so.3 -&gt; libcroco-0.6.so.3.0.1</span><br><span class="line">lrwxrwxrwx.  1 root root    21 Aug 14 10:58 libgettextpo.so.0 -&gt; libgettextpo.so.0.5.4</span><br><span class="line">lrwxrwxrwx.  1 root root    12 Aug 14 10:58 libm.so.6 -&gt; libm-2.25.so</span><br></pre>
+
+<p>经过比对<br>后来又改回了这三个链接到2.17</p>
+<pre class="highlight"><span class="line">sln /lib64/libdl-2.17.so /lib64/libdl.so.2</span><br><span class="line">sln /lib64/libBrokenLocale-2.17.so /lib64/libBrokenLocale.so.1</span><br><span class="line">sln /lib64/libm-2.17.so /lib64/libm.so.6</span><br></pre>
+<h4 id="总结一共改回了这些，具体要根据自己的情况改"><a href="#总结一共改回了这些，具体要根据自己的情况改" class="headerlink" title="总结一共改回了这些，具体要根据自己的情况改"></a>总结一共改回了这些，具体要根据自己的情况改</h4><pre class="highlight"><span class="line">sln /usr/lib64/ld-2.17.so /usr/lib64/ld-linux-x86-64.so.2</span><br><span class="line">sln /usr/lib64/libc-2.17.so /usr/lib64/libc.so.6</span><br><span class="line">sln /lib64/libdl-2.17.so /lib64/libdl.so.2</span><br><span class="line">sln /lib64/libBrokenLocale-2.17.so /lib64/libBrokenLocale.so.1</span><br><span class="line">sln /lib64/libm-2.17.so /lib64/libm.so.6</span><br></pre>
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://www.gemingyu.top/about">admingyu</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://www.gemingyu.top/2024/08/14/lib64-libpthread-so-0-symbol-libc-dl-error-tsd-version-GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference/">https://www.gemingyu.top/2024/08/14/lib64-libpthread-so-0-symbol-libc-dl-error-tsd-version-GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  
+  <div class="nav-item-next">
+    <a href="/2024/06/08/联想Y720-Cube-H170-ITX主板刷BIOS支持E3v5-CPU/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">联想Y720 Cube / H170 ITX主板刷BIOS支持E3v5 CPU </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content comment-card" style="margin-top: 16px;">
+  <div class="comment-card-title">评论</div>
+  
+  <div id="vcomments"></div>
+  
+  <script>
+    loadScript("//unpkg.com/valine/dist/Valine.min.js");
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+      new Valine({
+        el: '#vcomments',
+        appId: 'p50FHDYoXeKhgNL5geAy9h9H-gzGzoHsz',
+        appKey: 'aNaNwmUJLv6AWf7Ke406P15j',
+        placeholder: 'Just go go',
+        path: window.location.pathname,
+        avatar: 'mp',
+        meta: ["nick","mail","link"],
+        pageSize: '10',
+        lang: '',
+        visitor: 'false',
+        highlight: true,
+        recordIP: false,
+        
+        serverURLs: 'https://p50fhdyo.lc-cn-n1-shared.com',
+        
+        
+        
+        enableQQ: 'false',
+        requiredFields: [],
+      });
+    };
+  </script>
+
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference"><span class="toc-text">GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ls-ps-grep%E8%BF%99%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E9%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E4%BA%86"><span class="toc-text">ls,ps,grep这些基本命令都不能用了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E7%94%A8head%E6%9F%A5%E7%9C%8Blib64%E9%87%8C%E9%9D%A2%E7%8E%B0%E6%9C%89%E7%89%88%E6%9C%AC%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">先用head查看lib64里面现有版本有哪些:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E9%93%BE%E6%8E%A5%E5%9B%9E%E5%88%B02-17%E7%89%88%E6%9C%AC%EF%BC%8C%E5%B9%B6%E6%B5%8B%E8%AF%95ps%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%9A"><span class="toc-text">重新链接回到2.17版本，并测试ps能不能用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%9B%AE%E5%BD%95%EF%BC%8C%E7%9C%8B%E4%B8%8B%E5%9C%A8%E6%96%B0%E5%A2%9E-usr-lib64-ld-2-25-so%E9%82%A3%E4%B8%AA%E6%97%B6%E9%97%B4%E7%82%B9%EF%BC%8C%E5%93%AA%E4%BA%9B%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5%E8%A2%AB%E6%94%B9%E5%8F%98%E4%BA%86%EF%BC%8C%E5%B0%B1%E6%94%B9%E5%9B%9E%E5%8E%BB"><span class="toc-text">检查目录，看下在新增&#x2F;usr&#x2F;lib64&#x2F;ld-2.25.so那个时间点，哪些文件链接被改变了，就改回去</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%80%E5%85%B1%E6%94%B9%E5%9B%9E%E4%BA%86%E8%BF%99%E4%BA%9B%EF%BC%8C%E5%85%B7%E4%BD%93%E8%A6%81%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E6%83%85%E5%86%B5%E6%94%B9"><span class="toc-text">总结一共改回了这些，具体要根据自己的情况改</span></a></li></ol></li></ol></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/avatar.png" class="author-img">
+
+<p class="author-name">admingyu</p>
+<p class="author-description">自己动手丰衣足食</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>17</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>4</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference"><span class="toc-text">GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ls-ps-grep%E8%BF%99%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E9%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E4%BA%86"><span class="toc-text">ls,ps,grep这些基本命令都不能用了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E7%94%A8head%E6%9F%A5%E7%9C%8Blib64%E9%87%8C%E9%9D%A2%E7%8E%B0%E6%9C%89%E7%89%88%E6%9C%AC%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">先用head查看lib64里面现有版本有哪些:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E9%93%BE%E6%8E%A5%E5%9B%9E%E5%88%B02-17%E7%89%88%E6%9C%AC%EF%BC%8C%E5%B9%B6%E6%B5%8B%E8%AF%95ps%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%9A"><span class="toc-text">重新链接回到2.17版本，并测试ps能不能用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%9B%AE%E5%BD%95%EF%BC%8C%E7%9C%8B%E4%B8%8B%E5%9C%A8%E6%96%B0%E5%A2%9E-usr-lib64-ld-2-25-so%E9%82%A3%E4%B8%AA%E6%97%B6%E9%97%B4%E7%82%B9%EF%BC%8C%E5%93%AA%E4%BA%9B%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5%E8%A2%AB%E6%94%B9%E5%8F%98%E4%BA%86%EF%BC%8C%E5%B0%B1%E6%94%B9%E5%9B%9E%E5%8E%BB"><span class="toc-text">检查目录，看下在新增&#x2F;usr&#x2F;lib64&#x2F;ld-2.25.so那个时间点，哪些文件链接被改变了，就改回去</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%80%E5%85%B1%E6%94%B9%E5%9B%9E%E4%BA%86%E8%BF%99%E4%BA%9B%EF%BC%8C%E5%85%B7%E4%BD%93%E8%A6%81%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E6%83%85%E5%86%B5%E6%94%B9"><span class="toc-text">总结一共改回了这些，具体要根据自己的情况改</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
+    
+    <a href="\tags\Flask" title="Flask"><div class="tags-list-item">Flask</div></a>
+    
+    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
+    
+    <a href="\tags\神力科莎" title="神力科莎"><div class="tags-list-item">神力科莎</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference"><span class="toc-text">GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ls-ps-grep%E8%BF%99%E4%BA%9B%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E9%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E4%BA%86"><span class="toc-text">ls,ps,grep这些基本命令都不能用了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E7%94%A8head%E6%9F%A5%E7%9C%8Blib64%E9%87%8C%E9%9D%A2%E7%8E%B0%E6%9C%89%E7%89%88%E6%9C%AC%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-text">先用head查看lib64里面现有版本有哪些:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%96%B0%E9%93%BE%E6%8E%A5%E5%9B%9E%E5%88%B02-17%E7%89%88%E6%9C%AC%EF%BC%8C%E5%B9%B6%E6%B5%8B%E8%AF%95ps%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%EF%BC%9A"><span class="toc-text">重新链接回到2.17版本，并测试ps能不能用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%9B%AE%E5%BD%95%EF%BC%8C%E7%9C%8B%E4%B8%8B%E5%9C%A8%E6%96%B0%E5%A2%9E-usr-lib64-ld-2-25-so%E9%82%A3%E4%B8%AA%E6%97%B6%E9%97%B4%E7%82%B9%EF%BC%8C%E5%93%AA%E4%BA%9B%E6%96%87%E4%BB%B6%E9%93%BE%E6%8E%A5%E8%A2%AB%E6%94%B9%E5%8F%98%E4%BA%86%EF%BC%8C%E5%B0%B1%E6%94%B9%E5%9B%9E%E5%8E%BB"><span class="toc-text">检查目录，看下在新增&#x2F;usr&#x2F;lib64&#x2F;ld-2.25.so那个时间点，哪些文件链接被改变了，就改回去</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%80%E5%85%B1%E6%94%B9%E5%9B%9E%E4%BA%86%E8%BF%99%E4%BA%9B%EF%BC%8C%E5%85%B7%E4%BD%93%E8%A6%81%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E6%83%85%E5%86%B5%E6%94%B9"><span class="toc-text">总结一共改回了这些，具体要根据自己的情况改</span></a></li></ol></li></ol></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-08-14</div>
+        <a href="/2024/08/14/lib64-libpthread-so-0-symbol-libc-dl-error-tsd-version-GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference/"><div class="recent-posts-item-content">lib64/libpthread.so.0: symbol __libc_dl_error_tsd, version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-06-08</div>
+        <a href="/2024/06/08/联想Y720-Cube-H170-ITX主板刷BIOS支持E3v5-CPU/"><div class="recent-posts-item-content">联想Y720 Cube / H170 ITX主板刷BIOS支持E3v5 CPU</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-05-07</div>
+        <a href="/2024/05/07/修复ColorOS14删除系统软件后无法启动/"><div class="recent-posts-item-content">修复ColorOS14删除系统软件后无法启动</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-04-18</div>
+        <a href="/2024/04/18/ubuntu桌面系统终端应用打不开，闪退/"><div class="recent-posts-item-content">ubuntu桌面系统终端应用打不开，闪退</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2024
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">G.M.Y </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    <div class="BbeiAn-info">
+      <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">皖ICP备20004968号-1 </a>
+    </div>
+    
+    
+    
+      <div class="footer-dsc">
+        
+        访问量<span id="busuanzi_value_site_pv"></span>次
+        
+        
+        <span>&nbsp;|&nbsp;</span>
+        
+        
+        访客数<span id="busuanzi_value_site_uv"></span>次
+        
+      </div>
+      
+    
+    <script type="text/javascript" src="//js.users.51.la/21061817.js"></script>
+</footer>
+
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  <script>loadScript("/js/lib/busuanzi.min.js")</script>
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
