@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html  lang="zh-CN" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <meta name="description" content="能动手创造的东西，不香吗">
+  <script data-ad-client="ca-pub-5351183418704035" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <link rel="icon" href="/img/logo.png">
+  <title>Golang Package跨平台开发的简单实践</title>
+  
+  
+  <meta property="og:title" content="Golang Package跨平台开发的简单实践">
+  
+  
+  <meta property="og:url" content="https://www.gemingyu.top/2024/12/06/Golang-Package%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/index.html">
+  
+  
+  <meta property="og:img" content="/img/avatar.png">
+  
+  
+  <meta property="og:img" content="能动手创造的东西，不香吗">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:article:published_time" content="2024-12-06">
+  <meta property="og:article:modified_time" content="2024-12-06">
+  <meta property="og:article:author" content="admingyu">
+  
+  
+  
+  
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+  <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  <link rel="prefetch" href="//unpkg.com/valine/dist/Valine.min.js" as="script">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+<link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/logo.png" alt="logo">
+      
+      <span class="navbar-logo-dsc">G.M.Y</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">
+    
+    首页
+    
+    </a>
+    
+    <a href="/archives" class="navbar-menu-item">
+    
+    归档
+    
+    </a>
+    
+    <a href="/tags" class="navbar-menu-item">
+    
+    标签
+    
+    </a>
+    
+    <a href="/categories" class="navbar-menu-item">
+    
+    分类
+    
+    </a>
+    
+    <a href="/about" class="navbar-menu-item">
+    
+    关于
+    
+    </a>
+    
+    <a href="/links" class="navbar-menu-item">
+    
+    友链
+    
+    </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+    <a class="navbar-menu-item searchnavbar" id="search"><i class="iconfont icon-search" style="font-size: 1.2rem; font-weight: 400;"></i></a>
+  </div>
+</nav>
+    
+    <div id="local-search" style="display: none;">
+      <input class="navbar-menu-item" id="search-input" placeholder="请输入搜索内容...">
+      <div id="search-content"></div>
+    </div>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Golang Package跨平台开发的简单实践
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2024-12-06T03:21:37.000Z">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2024-12-06</span>
+    </time>
+    
+    
+    <span class="dot"></span>
+    <span>836 字</span>
+    
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <p><em>我需要写一个golang的支持Linux，Windows，MacOS的包，可以使用FsStats获取系统上的文件系统信息，但是由于Mac，Linux，Windows上获取文件系统信息的方式不同，所以要根据系统使用不同的逻辑，我该如何实现在包的外部统一使用FsStats来实现获取文件系统信息？</em></p>
+<p><strong>为了在 Go 中实现跨平台的文件系统信息获取逻辑，可以利用 Go 提供的 build 标签功能，将不同平台的实现逻辑分别写在不同的文件中，然后在包的公共接口层提供一个统一的函数接口给外部调用。</strong></p>
+<p><strong>以下是详细实现步骤：</strong></p>
+<h5 id="1-定义跨平台的统一接口"><a href="#1-定义跨平台的统一接口" class="headerlink" title="1. 定义跨平台的统一接口"></a>1. 定义跨平台的统一接口</h5><p>先定义一个结构和方法签名，供外部统一使用。例如：<br>fsstats/fsstats.go</p>
+<pre class="highlight"><span class="line"><span class="keyword">package</span> fsstats</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> FileSystemStats <span class="keyword">struct</span> &#123;</span><br><span class="line">    Total     <span class="type">uint64</span></span><br><span class="line">    Free      <span class="type">uint64</span></span><br><span class="line">    Available <span class="type">uint64</span></span><br><span class="line">    Used      <span class="type">uint64</span></span><br><span class="line">    FSName    <span class="type">string</span></span><br><span class="line">    MountPath <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// FsStats 获取文件系统信息的统一入口</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FsStats</span><span class="params">()</span></span> ([]FileSystemStats, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> getFsStats()</span><br><span class="line">&#125;</span><br></pre>
+<p>这里 getFsStats 是一个内部实现的函数，由不同平台具体实现。</p>
+<h5 id="2-实现不同平台的逻辑"><a href="#2-实现不同平台的逻辑" class="headerlink" title="2. 实现不同平台的逻辑"></a>2. 实现不同平台的逻辑</h5><p>根据不同的操作系统，分别实现 getFsStats 方法，并使用 build 标签来区分平台。</p>
+<p><strong>Linux 实现</strong><br>fsstats/fsstats_linux.go</p>
+<pre class="highlight"><span class="line"><span class="comment">//go:build linux</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> fsstats</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;syscall&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getFsStats</span><span class="params">()</span></span> ([]FileSystemStats, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> stats []FileSystemStats</span><br><span class="line">    <span class="comment">// 假设我们从 /proc/mounts 解析文件系统信息</span></span><br><span class="line">    <span class="comment">// 或者调用 syscall.Statfs 获取信息</span></span><br><span class="line">    fs := syscall.Statfs_t&#123;&#125;</span><br><span class="line">    err := syscall.Statfs(<span class="string">&quot;/&quot;</span>, &amp;fs)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stats = <span class="built_in">append</span>(stats, FileSystemStats&#123;</span><br><span class="line">        Total:     fs.Blocks * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        Free:      fs.Bfree * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        Available: fs.Bavail * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        Used:      (fs.Blocks - fs.Bfree) * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        FSName:    <span class="string">&quot;ext4&quot;</span>, <span class="comment">// 示例</span></span><br><span class="line">        MountPath: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> stats, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre>
+<p><strong>Windows 实现</strong><br>fsstats/fsstats_windows.go</p>
+<pre class="highlight"><span class="line"><span class="comment">//go:build windows</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> fsstats</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;syscall&quot;</span></span><br><span class="line">    <span class="string">&quot;unsafe&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getFsStats</span><span class="params">()</span></span> ([]FileSystemStats, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> stats []FileSystemStats</span><br><span class="line">    kernel32 := syscall.NewLazyDLL(<span class="string">&quot;kernel32.dll&quot;</span>)</span><br><span class="line">    getDiskFreeSpaceEx := kernel32.NewProc(<span class="string">&quot;GetDiskFreeSpaceExW&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> freeBytesAvailable, totalNumberOfBytes, totalNumberOfFreeBytes <span class="type">int64</span></span><br><span class="line">    _, _, err := getDiskFreeSpaceEx.Call(</span><br><span class="line">        <span class="type">uintptr</span>(unsafe.Pointer(syscall.StringToUTF16Ptr(<span class="string">&quot;C:\\&quot;</span>))),</span><br><span class="line">        <span class="type">uintptr</span>(unsafe.Pointer(&amp;freeBytesAvailable)),</span><br><span class="line">        <span class="type">uintptr</span>(unsafe.Pointer(&amp;totalNumberOfBytes)),</span><br><span class="line">        <span class="type">uintptr</span>(unsafe.Pointer(&amp;totalNumberOfFreeBytes)),</span><br><span class="line">    )</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &amp;&amp; err.Error() != <span class="string">&quot;The operation completed successfully.&quot;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stats = <span class="built_in">append</span>(stats, FileSystemStats&#123;</span><br><span class="line">        Total:     <span class="type">uint64</span>(totalNumberOfBytes),</span><br><span class="line">        Free:      <span class="type">uint64</span>(totalNumberOfFreeBytes),</span><br><span class="line">        Available: <span class="type">uint64</span>(freeBytesAvailable),</span><br><span class="line">        Used:      <span class="type">uint64</span>(totalNumberOfBytes - totalNumberOfFreeBytes),</span><br><span class="line">        FSName:    <span class="string">&quot;NTFS&quot;</span>, <span class="comment">// 示例</span></span><br><span class="line">        MountPath: <span class="string">&quot;C:\\&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> stats, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre>
+<p><strong>MacOS 实现</strong><br>fsstats/fsstats_darwin.go</p>
+<pre class="highlight"><span class="line"><span class="comment">//go:build darwin</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> fsstats</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;syscall&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getFsStats</span><span class="params">()</span></span> ([]FileSystemStats, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> stats []FileSystemStats</span><br><span class="line">    fs := syscall.Statfs_t&#123;&#125;</span><br><span class="line">    err := syscall.Statfs(<span class="string">&quot;/&quot;</span>, &amp;fs)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stats = <span class="built_in">append</span>(stats, FileSystemStats&#123;</span><br><span class="line">        Total:     fs.Blocks * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        Free:      fs.Bfree * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        Available: fs.Bavail * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        Used:      (fs.Blocks - fs.Bfree) * <span class="type">uint64</span>(fs.Bsize),</span><br><span class="line">        FSName:    <span class="string">&quot;apfs&quot;</span>, <span class="comment">// 示例</span></span><br><span class="line">        MountPath: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> stats, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre>
+<h5 id="3-外部调用统一接口"><a href="#3-外部调用统一接口" class="headerlink" title="3. 外部调用统一接口"></a>3. 外部调用统一接口</h5><p>外部调用时，无需关注平台差异，只需调用 <code>fsstats.FsStats()</code></p>
+<pre class="highlight"><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">    <span class="string">&quot;yourmodule/fsstats&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    stats, err := fsstats.FsStats()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatalf(<span class="string">&quot;Failed to get file system stats: %v&quot;</span>, err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> _, stat := <span class="keyword">range</span> stats &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;FileSystem: %s, Total: %d, Used: %d, Free: %d, MountPath: %s\n&quot;</span>,</span><br><span class="line">            stat.FSName, stat.Total, stat.Used, stat.Free, stat.MountPath)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+<p>总结:<br>跨平台兼容通过 build 标签在不同文件中实现不同平台的逻辑。<br>统一接口在公共包中定义对外暴露的接口，屏蔽平台细节。<br>灵活扩展可以轻松为新平台添加实现，而不影响现有代码。<br>这种模式是 Go 跨平台开发的最佳实践，符合模块化和代码清晰性的要求。</p>
+
+  </div>
+  <div>
+  
+  <div class="post-note note-warning copyright" style="margin-top: 42px">
+    <p><span style="font-weight: bold;">作者：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://www.gemingyu.top/about">admingyu</a></p>
+    <p><span style="font-weight: bold;">文章链接：</span><a target="_blank" rel="nofollow noopener noreferrer" href="https://www.gemingyu.top/2024/12/06/Golang-Package%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/">https://www.gemingyu.top/2024/12/06/Golang-Package%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%BC%80%E5%8F%91%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E8%B7%B5/</a></p>
+    <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+  </div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  
+  <div class="nav-item-next">
+    <a href="/2024/08/14/lib64-libpthread-so-0-symbol-libc-dl-error-tsd-version-GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference/" class="nav-link">
+      <div>
+        <div class="nav-label">下一篇</div>
+        
+        <div class="nav-title">version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content comment-card" style="margin-top: 16px;">
+  <div class="comment-card-title">评论</div>
+  
+  <div id="vcomments"></div>
+  
+  <script>
+    loadScript("//unpkg.com/valine/dist/Valine.min.js");
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+      new Valine({
+        el: '#vcomments',
+        appId: 'p50FHDYoXeKhgNL5geAy9h9H-gzGzoHsz',
+        appKey: 'aNaNwmUJLv6AWf7Ke406P15j',
+        placeholder: 'Just go go',
+        path: window.location.pathname,
+        avatar: 'mp',
+        meta: ["nick","mail","link"],
+        pageSize: '10',
+        lang: '',
+        visitor: 'false',
+        highlight: true,
+        recordIP: false,
+        
+        serverURLs: 'https://p50fhdyo.lc-cn-n1-shared.com',
+        
+        
+        
+        enableQQ: 'false',
+        requiredFields: [],
+      });
+    };
+  </script>
+
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. 定义跨平台的统一接口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-text">2. 实现不同平台的逻辑</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%A4%96%E9%83%A8%E8%B0%83%E7%94%A8%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3"><span class="toc-text">3. 外部调用统一接口</span></a></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/avatar.png" class="author-img">
+
+<p class="author-name">admingyu</p>
+<p class="author-description">自己动手丰衣足食</p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>19</span>
+    <span>文章</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>0</span>
+    <span>分类</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>4</span>
+    <span>标签</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. 定义跨平台的统一接口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-text">2. 实现不同平台的逻辑</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%A4%96%E9%83%A8%E8%B0%83%E7%94%A8%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3"><span class="toc-text">3. 外部调用统一接口</span></a></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>分类</div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
+  <div class="tags-list">
+    
+    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
+    
+    <a href="\tags\Flask" title="Flask"><div class="tags-list-item">Flask</div></a>
+    
+    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
+    
+    <a href="\tags\神力科莎" title="神力科莎"><div class="tags-list-item">神力科莎</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
+<ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. 定义跨平台的统一接口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E4%B8%8D%E5%90%8C%E5%B9%B3%E5%8F%B0%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-text">2. 实现不同平台的逻辑</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%A4%96%E9%83%A8%E8%B0%83%E7%94%A8%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%8F%A3"><span class="toc-text">3. 外部调用统一接口</span></a></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>最近文章</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-12-06</div>
+        <a href="/2024/12/06/Golang-Package跨平台开发的简单实践/"><div class="recent-posts-item-content">Golang Package跨平台开发的简单实践</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-08-14</div>
+        <a href="/2024/08/14/lib64-libpthread-so-0-symbol-libc-dl-error-tsd-version-GLIBC-PRIVATE-not-defined-in-file-libc-so-6-with-link-time-reference/"><div class="recent-posts-item-content">version GLIBC_PRIVATE not defined in file libc.so.6 with link time reference</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-06-23</div>
+        <a href="/2024/06/23/hejiaqian-x1s-homeassistant/"><div class="recent-posts-item-content">惠桔/合家亲 X1S插座刷入LibreTiny接入Homeassistant</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2024-06-08</div>
+        <a href="/2024/06/08/联想Y720-Cube-H170-ITX主板刷BIOS支持E3v5-CPU/"><div class="recent-posts-item-content">联想Y720 Cube / H170 ITX主板刷BIOS支持E3v5 CPU</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2020 -
+          
+          2024
+        </span>
+        &nbsp;
+        <a href="/" class="footer-link">G.M.Y </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    <div class="BbeiAn-info">
+      <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">皖ICP备20004968号-1 </a>
+    </div>
+    
+    
+    
+      <div class="footer-dsc">
+        
+        访问量<span id="busuanzi_value_site_pv"></span>次
+        
+        
+        <span>&nbsp;|&nbsp;</span>
+        
+        
+        访客数<span id="busuanzi_value_site_uv"></span>次
+        
+      </div>
+      
+    
+    <script type="text/javascript" src="//js.users.51.la/21061817.js"></script>
+</footer>
+
+  <a role="button" id="scrollbutton" class="basebutton"  aria-label="回到顶部">
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton" aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget" aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a role="button" id="searchbutton" class="basebutton searchwidget" aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('aria-label', 'illustration');
+      wrapper.style.cssText = 'width: 100%; display: flex; justify-content: center;';
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt;
+      wrapper.dataset.nolink = true;
+      img[i].before(wrapper);
+      wrapper.append(img[i]);
+      var divWrap = document.createElement('div');
+      divWrap.classList.add('gallery');
+      wrapper.before(divWrap);
+      divWrap.append(wrapper);
+    }
+    baguetteBox.run('.gallery');
+  }
+</script>
+<script>loadScript("/js/lib/lightbox/baguetteBox.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  <script>loadScript("/js/lib/busuanzi.min.js")</script>
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
