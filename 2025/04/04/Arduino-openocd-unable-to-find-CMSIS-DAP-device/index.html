@@ -206,7 +206,7 @@
     
     
     <span class="dot"></span>
-    <span>345 字</span>
+    <span>418 字</span>
     
   </div>
   
@@ -220,16 +220,22 @@
 </li>
 </ul>
 <p><img src="/images/pasted-72.png" alt="upload successful" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/images/pasted-72.png" class="lozad post-image"></p>
-<p>问题出现了，arduino的openocd不能识别daplink设备，起初我还以为驱动有问题，或者daplink太垃圾，后来换了个daplink也不行</p>
-<p>因为玩这个芯片的人少，所以也没找到什么解决方案，最后几经周折发现是arduino自带的openocd版本太低导致的，应该是不兼容我的daplink</p>
+<h4 id="问题出现了"><a href="#问题出现了" class="headerlink" title="问题出现了"></a>问题出现了</h4><p>arduino的openocd不能识别daplink设备，起初我还以为驱动有问题，或者daplink太垃圾，后来换了个daplink也不行</p>
+<p>因为玩这个芯片的人少，所以也没找到什么解决方案，说什么的都有，有的人是因为权限问题，在我这都不能解决问题</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>后几经周折发现是arduino自带的openocd版本太低导致的，应该是不兼容我的daplink</p>
 <p>需要自己去openocd官网下载最新的openocd，解压到：<br><code>C:\Users\用户名\AppData\Local\Arduino15\packages\arduino\tools\openocd</code>把现有的给替换掉</p>
 <p><img src="/images/pasted-73.png" alt="upload successful" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/images/pasted-73.png" class="lozad post-image"></p>
 <p>确保子目录结构如下：</p>
 <p><img src="/images/pasted-74.png" alt="upload successful" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/images/pasted-74.png" class="lozad post-image"></p>
 <p>再上传就可以了</p>
-<p>拓展内容：<br>daplink选购：淘宝上10块左右的，大部分都是用STM32F103C6T6，内存小的可怜，下载速度很慢，固件也是阉割版的，不然放不下，会有很多奇怪的问题，建议不要买，推荐后面这个图中的CH32V305的，稳定且速度很快，就贵几块钱</p>
+<h4 id="拓展内容"><a href="#拓展内容" class="headerlink" title="拓展内容"></a>拓展内容</h4><p>daplink选购：淘宝上10块左右的，大部分都是用STM32F103C6T6，内存小的可怜，下载速度很慢，固件也是阉割版的，不然放不下，会有很多奇怪的问题，建议不要买，推荐后面这个图中的CH32V305的，稳定且速度很快，就贵几块钱</p>
 <p><img src="/images/pasted-75.png" alt="upload successful" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/images/pasted-75.png" class="lozad post-image"></p>
 <p><img src="/images/pasted-76.png" alt="upload successful" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/images/pasted-76.png" class="lozad post-image"></p>
+<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.arduino.cc/software/ide-v1/tutorials/getting-started/cores/arduino-samd/">https://docs.arduino.cc/software/ide-v1/tutorials/getting-started/cores/arduino-samd/</a></li>
+<li><a target="_blank" rel="noopener" href="https://forum.arduino.cc/t/resolved-arduino-zero-error-unable-to-open-cmsis-dap-device/854416/2">https://forum.arduino.cc/t/resolved-arduino-zero-error-unable-to-open-cmsis-dap-device/854416/2</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/DeqingSun/Debug-Arduino-ATSAMD21G18-with-CMSIS-DAP">https://github.com/DeqingSun/Debug-Arduino-ATSAMD21G18-with-CMSIS-DAP</a></li>
+</ul>
 
   </div>
   <div>
@@ -297,7 +303,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
-
+<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%87%BA%E7%8E%B0%E4%BA%86"><span class="toc-text">问题出现了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E5%86%85%E5%AE%B9"><span class="toc-text">拓展内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -330,7 +336,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
-
+<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%87%BA%E7%8E%B0%E4%BA%86"><span class="toc-text">问题出现了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E5%86%85%E5%AE%B9"><span class="toc-text">拓展内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol>
     </div>
   </article>
   
@@ -349,13 +355,13 @@
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
   <div class="tags-list">
     
-    <a href="\tags\神力科莎" title="神力科莎"><div class="tags-list-item">神力科莎</div></a>
-    
-    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
+    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
     
     <a href="\tags\Flask" title="Flask"><div class="tags-list-item">Flask</div></a>
     
-    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
+    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
+    
+    <a href="\tags\神力科莎" title="神力科莎"><div class="tags-list-item">神力科莎</div></a>
     
   </div>
 </div>
@@ -370,7 +376,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>目录</div>
-
+<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%87%BA%E7%8E%B0%E4%BA%86"><span class="toc-text">问题出现了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%93%E5%B1%95%E5%86%85%E5%AE%B9"><span class="toc-text">拓展内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol>
   </article>
   
   
