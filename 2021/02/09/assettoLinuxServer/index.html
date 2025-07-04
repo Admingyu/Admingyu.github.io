@@ -6,7 +6,7 @@
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color" content="#fff" id="theme-color">
-  <meta name="description" content="People who are serious about software should make their own hardware">
+  <meta name="description" content="能动手创造的东西，不香吗">
   <script data-ad-client="ca-pub-5351183418704035" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <link rel="icon" href="/img/logo.png">
   <title>神力科莎Linux 开服务器</title>
@@ -21,12 +21,12 @@
   <meta property="og:img" content="/img/avatar.png">
   
   
-  <meta property="og:img" content="People who are serious about software should make their own hardware">
+  <meta property="og:img" content="能动手创造的东西，不香吗">
   
   
   <meta property="og:type" content="article">
   <meta property="og:article:published_time" content="2021-02-09">
-  <meta property="og:article:modified_time" content="2023-06-20">
+  <meta property="og:article:modified_time" content="2021-02-09">
   <meta property="og:article:author" content="admingyu">
   
   
@@ -228,26 +228,18 @@
 <h2 id="如果你的服务器是64位的系统需要安装32位的运行库（Steam-是32位的："><a href="#如果你的服务器是64位的系统需要安装32位的运行库（Steam-是32位的：" class="headerlink" title="如果你的服务器是64位的系统需要安装32位的运行库（Steam 是32位的："></a>如果你的服务器是64位的系统需要安装32位的运行库（Steam 是32位的：</h2><p>32位系统可跳过</p>
 <pre class="highlight"><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install lib32gcc1 </span><br></pre>
 <h3 id="安装stracker"><a href="#安装stracker" class="headerlink" title="安装stracker"></a>安装stracker</h3><pre class="highlight"><span class="line">sudo apt-get install zlib1g:i386</span><br></pre>
-
-<h3 id="创建Steam用户-并获取该用户下的目录权限："><a href="#创建Steam用户-并获取该用户下的目录权限：" class="headerlink" title="创建Steam用户,并获取该用户下的目录权限："></a>创建Steam用户,并获取该用户下的目录权限：</h3><pre class="highlight"><span class="line">sudo <span class="built_in">mkdir</span>  /home/steam                  </span><br><span class="line"><span class="built_in">chown</span> user: group /home/steam -R</span><br></pre>
-
-<h3 id="解压Steam-Linux终端，并解压执行"><a href="#解压Steam-Linux终端，并解压执行" class="headerlink" title="解压Steam Linux终端，并解压执行"></a>解压Steam Linux终端，并解压执行</h3><pre class="highlight"><span class="line">sudo <span class="built_in">chmod</span> -R 755  /home/steam/</span><br><span class="line"><span class="built_in">cd</span> /home/steam</span><br><span class="line">wget http://media.steampowered.com/client/steamcmd_linux.tar.gz</span><br><span class="line">tar -xvf steamcmd_linux.tar.gz </span><br><span class="line"><span class="built_in">rm</span> steamcmd_linux.tar.gz  </span><br><span class="line">./steamcmd.sh +@sSteamCmdForcePlatformType windows</span><br><span class="line"></span><br></pre>
-
+<h3 id="创建Steam用户-并获取该用户下的目录权限："><a href="#创建Steam用户-并获取该用户下的目录权限：" class="headerlink" title="创建Steam用户,并获取该用户下的目录权限："></a>创建Steam用户,并获取该用户下的目录权限：</h3><pre class="highlight"><span class="line">sudo mkdir  /home/steam                  </span><br><span class="line">chown user: group /home/steam -R</span><br></pre>
+<h3 id="解压Steam-Linux终端，并解压执行"><a href="#解压Steam-Linux终端，并解压执行" class="headerlink" title="解压Steam Linux终端，并解压执行"></a>解压Steam Linux终端，并解压执行</h3><pre class="highlight"><span class="line">sudo chmod -R 755  /home/steam/</span><br><span class="line"><span class="built_in">cd</span> /home/steam</span><br><span class="line">wget http://media.steampowered.com/client/steamcmd_linux.tar.gz</span><br><span class="line">tar -xvf steamcmd_linux.tar.gz </span><br><span class="line">rm steamcmd_linux.tar.gz  </span><br><span class="line">./steamcmd.sh +@sSteamCmdForcePlatformType windows</span><br><span class="line"></span><br></pre>
 <h2 id="之后会进入Steam终端-gt-像这样："><a href="#之后会进入Steam终端-gt-像这样：" class="headerlink" title="之后会进入Steam终端&gt;,像这样："></a>之后会进入Steam终端&gt;,像这样：</h2><pre class="highlight"><span class="line">Steam&gt;</span><br></pre>
-
 <h3 id="输入Login-你的用户名并回车"><a href="#输入Login-你的用户名并回车" class="headerlink" title="输入Login  你的用户名并回车"></a>输入Login  你的用户名并回车</h3><pre class="highlight"><span class="line">Steam&gt; login &lt;username&gt;;</span><br><span class="line">Steam&gt; passwd</span><br><span class="line">Steam&gt; enter security code sent to you registration email of your steam account </span><br></pre>
-
 <p>然后再输入密码登录, 后面可能还让你输入邮件验证码、动态令牌之类的，根据提示来就行</p>
 <h3 id="然后安装app："><a href="#然后安装app：" class="headerlink" title="然后安装app："></a>然后安装app：</h3><pre class="highlight"><span class="line">Steam&gt; force_install_dir ./assetto</span><br><span class="line">Steam&gt; app_update 302550  </span><br><span class="line">Steam&gt; <span class="built_in">exit</span></span><br></pre>
-
 <p>然后配置一下你的开服信息，比如赛道，车，服务器名称什么的<br>配置文件在*/home/steam/assetto/cfg/server_cfg.ini*<br>用vim或者nano编辑都可以的</p>
 <p>配置车辆列表：<br><em>/home/steam/assetto/cfg/entry_list.ini</em></p>
 <h3 id="配置完成后开服："><a href="#配置完成后开服：" class="headerlink" title="配置完成后开服："></a>配置完成后开服：</h3><pre class="highlight"><span class="line">./acServer</span><br></pre>
-
 <p>到此结束，此外你还要把端口9600的udp，tcp的端口打开，包括http的8081端口也要打开：</p>
 <p>比如可以这样打开：</p>
 <pre class="highlight"><span class="line">sudo ufw allow 9600</span><br><span class="line">sudo ufw allow 8081</span><br></pre>
-
 <p><strong>注意，阿里云的服务器，要到阿里云ECS的安全组里面配置打开</strong></p>
 
   </div>
@@ -337,10 +329,10 @@
 <img src="/img/avatar.png" class="author-img">
 
 <p class="author-name">admingyu</p>
-<p class="author-description">People who are serious about software should make their own hardware</p>
+<p class="author-description">自己动手丰衣足食</p>
 <div class="author-message">
   <a class="author-posts-count" href="/archives">
-    <span>8</span>
+    <span>23</span>
     <span>文章</span>
   </a>
   <a class="author-categories-count" href="/categories">
@@ -380,13 +372,13 @@
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>热门标签</div>
   <div class="tags-list">
     
-    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
-    
-    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
-    
     <a href="\tags\神力科莎" title="神力科莎"><div class="tags-list-item">神力科莎</div></a>
     
+    <a href="\tags\Windows，疑难杂症" title="Windows，疑难杂症"><div class="tags-list-item">Windows，疑难杂症</div></a>
+    
     <a href="\tags\Flask" title="Flask"><div class="tags-list-item">Flask</div></a>
+    
+    <a href="\tags\服务器" title="服务器"><div class="tags-list-item">服务器</div></a>
     
   </div>
 </div>
@@ -411,23 +403,23 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2023-06-20</div>
-        <a href="/2023/06/20/hello-world/"><div class="recent-posts-item-content">Hello World</div></a>
+        <div class="recent-posts-item-title">2025-06-24</div>
+        <a href="/2025/06/24/在React页面中嵌入html实现读取和修改react原生输入框内容/"><div class="recent-posts-item-content">在React页面中嵌入html实现读取和修改react原生输入框内容</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2023-06-19</div>
-        <a href="/2023/06/19/美能达X300快门故障维修/"><div class="recent-posts-item-content">美能达X300快门故障维修</div></a>
+        <div class="recent-posts-item-title">2025-04-04</div>
+        <a href="/2025/04/04/Arduino-openocd-unable-to-find-CMSIS-DAP-device/"><div class="recent-posts-item-content"> Arduino daplink:openocd unable to find CMSIS-DAP device</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-02-19</div>
-        <a href="/2021/02/19/interview/"><div class="recent-posts-item-content">interview</div></a>
+        <div class="recent-posts-item-title">2025-02-08</div>
+        <a href="/2025/02/08/ChatGPT计算两个时间相差的自然日引发的问题/"><div class="recent-posts-item-content">ChatGPT计算两个时间相差的自然日引发的问题</div></a>
       </div>
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2021-02-09</div>
-        <a href="/2021/02/09/cheap-server-solution-in-china/"><div class="recent-posts-item-content">便宜的个人服务器方案</div></a>
+        <div class="recent-posts-item-title">2025-01-16</div>
+        <a href="/2025/01/16/某APP逆向复活记/"><div class="recent-posts-item-content">某APP逆向复活记</div></a>
       </div>
     
   </div>
