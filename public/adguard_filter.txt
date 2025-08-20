@@ -1,0 +1,14 @@
+apppush-sh5.xiaohongshu.com
+crash.xiaohongshu.com
+flash.xiaohongshu.com
+referee.xiaohongshu.com
+s.xiaohongshu.com
+spider-tracker.xiaohongshu.com
+splash-online-decision.xiaohongshu.com
+store.xiaohongshu.com
+t-ads.xiaohongshu.com
+vi.xiaohongshu.com
+xhsci-hk-cos.xiaohongshu.net
+cm.bilibili.com
+game.bilibili.com
+miniapp.bilibili.com
